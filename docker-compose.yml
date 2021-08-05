@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+    app:
+        container_name: photos-app
+        build:
+            context: app
+            dockerfile: Dockerfile
+        volumes:
+            - ./app/src:/app/src
+        ports:
+            - 3000:3000
+
+    api:
+        container_name: photos-api
+        build:
+            context: api
+            dockerfile: Dockerfile
+        volumes:
+            - ./api/app:/app/app
+        ports:
+            - 8000:80
+
+    postgres:
+        container_name: photos-postgres
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_PASSWORD: password
